@@ -1,4 +1,5 @@
-_G.Base =  _G.Base or { new = function(s) local o = {} setmetatable(o,s) s.__index = s s:initialise() return o end, initialise = function() end }
+-- Standard OOP (with Constructor parameters added.)
+_G.Base =  _G.Base or { new = function(s,...) local o = { } setmetatable(o,s) s.__index = s s:initialise(...) return o end, initialise = function() end }
 
 --
 --		Class encapsulating a single transition, which can perform a transition on a display object or (eventually) my View Scene class.
