@@ -118,11 +118,11 @@ function TransitionManager:transitionCompletedMessage()
 		self:makeVisible(self.sceneInfo.fromScene,true) 								-- make the from scene visible again, so both are visible on exit.
 		self:makeVisible(self.sceneInfo.toScene,true) 									-- make to scene visible, so it comes on top.
 		local target = self.sceneInfo.target 											-- get the message target
-		self.sceneInfo = nil 															-- remove any references we do not want.
 		if target ~= nil then 								 							-- and tell the target we are done.
 			assert(target.transitionCompleted ~= nil,"target message class does not have a transitionCompleted() method")
 			target:transitionCompleted() 
 		end
+		self.sceneInfo = nil 															-- remove any references we do not want.
 	end
 end
 
