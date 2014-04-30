@@ -128,6 +128,15 @@ local SceneManager = Base:new()
 
 SceneManager.transitionInProgress = false 													-- used to lock out gotoScreen when one is in progress.
 
+function SceneManager.getInstance()
+	if SceneManager.instance == nil then 													-- Create an instance of SceneManager
+		SceneManager.instance = SceneManager:new()
+		SceneManager.new = function() error("SceneManager is a singleton") end
+	end
+	return SceneManager.instance
+end
+
+
 function SceneManager:initialise(transitionManager)
 	if transitionManager == nil then transitionManager = require("system.transitions") end 	-- pull in Transition Manager default if not specified.
 	self.transitionManager = transitionManager 												-- save transition manager reference.
@@ -148,6 +157,7 @@ function SceneManager:destroy()
 	for _,ref in pairs(self.sceneStore) do self.sceneStore[ref]:_destroyScene() end 		-- destroy all the scenes completely.
 	self.sceneStore = nil 																	-- and remove remaining references
 	self.transitionManager = nil
+	SceneManager.instance = nil 															-- stop any further singleton use.
 end
 
 function SceneManager:_setEnableEnterFrameEvent(newStatus) 									-- turn enter-frame off and on.
@@ -174,6 +184,10 @@ function SceneManager:append(sceneName,sceneInstance)
 	sceneInstance:setManagerInstance(self) 													-- tell the scene who its parent is.
 	if sceneInstance.enterFrame ~= nil then self:_setEnableEnterFrameEvent(true) end 		-- enable tick if a scene has enterFrame method
 	return self
+end
+
+function SceneManager:getCurrentScene()
+	return self.currentScene 																-- retrieve the current scene.
 end
 
 function SceneManager:gotoScene(scene)
