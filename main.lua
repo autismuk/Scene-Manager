@@ -4,9 +4,8 @@
 --]]
 
 display.setStatusBar( display.HiddenStatusBar )
-transitionMgr = require("transitions")
-sm = require("scenemgr")
-smgr = sm.SceneManager:new(transitionMgr)																	-- create a new scene manager
+sm = require("system.scenemgr")
+smgr = sm.SceneManager:new()																				-- create a new scene manager
 
 SceneClass = sm.Scene:new() 																				-- create a new scene.
 

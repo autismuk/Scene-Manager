@@ -1,3 +1,13 @@
+--- ************************************************************************************************************************************************************************
+---
+---				Name : 		scenemgr.lua
+---				Purpose :	Manage Scene transitions and state
+---				Created:	30 April 2014
+---				Author:		Paul Robson (paul@robsons.org.uk)
+---				License:	MIT
+---
+--- ************************************************************************************************************************************************************************
+
 -- Standard OOP (with Constructor parameters added.)
 _G.Base =  _G.Base or { new = function(s,...) local o = { } setmetatable(o,s) s.__index = s s:initialise(...) return o end, initialise = function() end }
 
@@ -86,11 +96,27 @@ local OverlayScene = Scene:new()
 
 OverlayScene.isOverlay = true 																-- return true if operates as overlay.
 
+function OverlayScene:_initialiseScene()
+	local wasCreated = self.isCreated 														-- remember if the super call created it.
+	Scene._initialiseScene(self) 															-- call the super class (must find a better way !)
+	if not wasCreated and self:isModal() then 												-- if it wasn't created, then it will have been now - blocker if modal.
+		local blockRect = display.newRect(0,0,display.contentWidth,display.contentHeight)	-- create a rectangle
+		blockRect.anchorX,blockRect.anchorY = 0,0
+		blockRect:setFillColor( 0,0,0 )
+		self:insert(blockRect) 																-- insert at the back of the view group
+		blockRect:toBack()
+		blockRect:addEventListener( "tap", function(e) return true end) 					-- make it catch all touch/tap events.
+		blockRect:addEventListener( "touch", function(e) return true end )
+		blockRect.alpha = self:getOverlayAlpha() 											-- you can change the darkening.
+	end
+end
+
 function OverlayScene:closeOverlay() self.owningManager:_closeOverlay() end 				-- passes close overlay to scene manager.
 function OverlayScene:isModal() return false end
 
 local ModalOverlayScene = OverlayScene:new()												-- same thing but modal overlay.
 function ModalOverlayScene:isModal() return true end
+function ModalOverlayScene:getOverlayAlpha() return 0.6 end 								-- this makes the background 'dark' - making this zero makes it normal
 
 --- ************************************************************************************************************************************************************************
 ---
@@ -103,7 +129,7 @@ local SceneManager = Base:new()
 SceneManager.transitionInProgress = false 													-- used to lock out gotoScreen when one is in progress.
 
 function SceneManager:initialise(transitionManager)
-	assert(transitionManager ~= nil,"No instance of Transition Manager provided") 			-- check transition manager here.
+	if transitionManager == nil then transitionManager = require("system.transitions") end 	-- pull in Transition Manager default if not specified.
 	self.transitionManager = transitionManager 												-- save transition manager reference.
 	self.sceneStore = {} 																	-- hash of scene name -> scene event.object1
 	self.currentScene = nil 																-- No current scene.
@@ -215,6 +241,5 @@ end
 
 return { SceneManager = SceneManager, Scene = Scene, DelayScene = DelayScene, OverlayScene = OverlayScene, ModalOverlayScene = ModalOverlayScene }
 
--- TODO: Overlay scene modality.
 -- TODO: Storage as part of a scene.
 -- TODO: Clean up (GC) via Scene Manager, NOT the current scene obviously.
