@@ -24,6 +24,7 @@ function Scene:initialise()
 	self.viewGroup = nil 																	-- there is no new group.
 	self.owningManager = nil 																-- it is not owned by a scene manager.
 	self.allowGarbageCollection = true 														-- true if can be garbage collected.
+	self.storage = {} 																		-- 'protected' storage.
 end
 
 function Scene:setManagerInstance(manager) self.owningManager = manager return self end 	-- set the manager instance.
@@ -255,5 +256,4 @@ end
 
 return { SceneManager = SceneManager, Scene = Scene, DelayScene = DelayScene, OverlayScene = OverlayScene, ModalOverlayScene = ModalOverlayScene }
 
--- TODO: Storage as part of a scene.
 -- TODO: Clean up (GC) via Scene Manager, NOT the current scene obviously.
