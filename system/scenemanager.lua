@@ -1,6 +1,6 @@
 --- ************************************************************************************************************************************************************************
 ---
----				Name : 		scenemgr.lua
+---				Name : 		scenemanager.lua
 ---				Purpose :	Manage Scene transitions and state
 ---				Created:	30 April 2014
 ---				Author:		Paul Robson (paul@robsons.org.uk)
