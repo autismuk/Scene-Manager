@@ -6,7 +6,7 @@
 display.setStatusBar( display.HiddenStatusBar )
 
 sm = require("system.scenemanager")
-smgr = sm.SceneManager.getInstance()																		-- acquire the scene manager instance.
+smgr = sm.SceneManager																				-- acquire the scene manager instance.
 
 SimpleSceneClass = sm.Scene:new() 																			
 
