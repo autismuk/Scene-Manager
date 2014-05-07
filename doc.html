@@ -1,112 +1,152 @@
-<!DOCTYPE html><html><head><style>body { background:#333; color:#0F0; font-family:Arial,Verdana;} h1 { color:#FF0; } h2 { color:#0FF } table,tr,td { color: #CCC; padding:4px;border:1px solid white; border-collapse:collapse; }</style></head><body>
+<!DOCTYPE html><html><head><style>body { background:#333; color:#0F0; font-family:Arial,Verdana;} a { color:#0AA } h1 { color:#FF0; } h2 { color:#0FF } table,tr,td { color: #CCC; padding:4px;border:1px solid white; border-collapse:collapse; }</style></head><body>
+<a name="DelayScene"></a>
 <hr><h1>DelayScene</h1>
 <p><h3>Extends Scene</h3></p>
-<p>The delay scene automatically transits to the next scene without any coding or user intervention. It is used for inbetween scenes that only last for a specific time.</p><hr>
+<p>The delay scene automatically transits to the next scene without any coding or user intervention. It is used for inbetween scenes that only last for a specific time.</p>
+<p>Methods : <a href="#Scene_(constructor)"/><i>(constructor)</i></a>,<a href="#Scene_create"/><i>create</i></a>,<a href="#Scene_destroy"/><i>destroy</i></a>,<a href="#Scene_getTransitionTime"/><i>getTransitionTime</i></a>,<a href="#Scene_getTransitionType"/><i>getTransitionType</i></a>,<a href="#Scene_getViewGroup"/><i>getViewGroup</i></a>,<a href="#Scene_gotoScene"/><i>gotoScene</i></a>,<a href="#Scene_insert"/><i>insert</i></a>,<a href="#DelayScene_nextScene"/>nextScene</a>,<a href="#Scene_postClose"/><i>postClose</i></a>,<a href="#Scene_postOpen"/><i>postOpen</i></a>,<a href="#Scene_preClose"/><i>preClose</i></a>,<a href="#Scene_preOpen"/><i>preOpen</i></a>,<a href="#Scene_protect"/><i>protect</i></a>,<a href="#DelayScene_sceneDelay"/>sceneDelay</a></p><hr><a name="DelayScene_enterFrame"></a>
+<a name="DelayScene_nextScene"></a>
 <h2>nextScene()</h2>
 <table>
 <tr><td>return</td><td>string</td><td>Name of next scene</td></tr>
 </table>
 <p>Override this to define the next scene</p>
+<a name="DelayScene_sceneDelay"></a>
 <h2>sceneDelay()</h2>
 <table>
 <tr><td>return</td><td>number</td><td>Visible time in milliseconds</td></tr>
 </table>
 <p>Override this to determine how long the scene stays on.</p>
+<a name="ModalOverlayScene"></a>
 <hr><h1>ModalOverlayScene</h1>
 <p><h3>Extends OverlayScene</h3></p>
-<p>Simple subclass which extends Overlay scene to be modal.</p><hr>
+<p>Simple subclass which extends Overlay scene to be modal.</p>
+<p>Methods : <a href="#Scene_(constructor)"/><i>(constructor)</i></a>,<a href="#OverlayScene_closeOverlay"/><i>closeOverlay</i></a>,<a href="#Scene_create"/><i>create</i></a>,<a href="#Scene_destroy"/><i>destroy</i></a>,<a href="#ModalOverlayScene_getOverlayAlpha"/>getOverlayAlpha</a>,<a href="#Scene_getTransitionTime"/><i>getTransitionTime</i></a>,<a href="#Scene_getTransitionType"/><i>getTransitionType</i></a>,<a href="#Scene_getViewGroup"/><i>getViewGroup</i></a>,<a href="#Scene_gotoScene"/><i>gotoScene</i></a>,<a href="#Scene_insert"/><i>insert</i></a>,<a href="#ModalOverlayScene_isModal"/>isModal</a>,<a href="#Scene_postClose"/><i>postClose</i></a>,<a href="#Scene_postOpen"/><i>postOpen</i></a>,<a href="#Scene_preClose"/><i>preClose</i></a>,<a href="#Scene_preOpen"/><i>preOpen</i></a>,<a href="#Scene_protect"/><i>protect</i></a></p><hr><a name="ModalOverlayScene_getOverlayAlpha"></a>
 <h2>getOverlayAlpha()</h2>
 <table>
 <tr><td>return</td><td>number</td><td>darkness of the overlaid scene.</td></tr>
 </table>
 <p>Determines how dark you want the overlay background scene to be - 0 makes this completely transparent if you override it.</p>
+<a name="ModalOverlayScene_isModal"></a>
 <h2>isModal()</h2>
 <table>
 <tr><td>return</td><td>boolean</td><td>true if it is modal, which it is :)</td></tr>
 </table>
 <p>Override modal test to return true.</p>
+<a name="OverlayScene"></a>
 <hr><h1>OverlayScene</h1>
 <p><h3>Extends Scene</h3></p>
-<p>The OverlayScene operates like other scenes, in that it is 'goto'ed but it leaves the remnants of the scene below, by default dimmed, and you return to the scene using closeOverlay(). It is designed for popups over the display. A scene which is overlaid does not receive close/open messages when the overlay opens and closes, it behaves as if the overlay did not occur.</p><hr>
+<p>The OverlayScene operates like other scenes, in that it is 'goto'ed but it leaves the remnants of the scene below, by default dimmed, and you return to the scene using closeOverlay(). It is designed for popups over the display. A scene which is overlaid does not receive close/open messages when the overlay opens and closes, it behaves as if the overlay did not occur.</p>
+<p>Methods : <a href="#Scene_(constructor)"/><i>(constructor)</i></a>,<a href="#OverlayScene_closeOverlay"/>closeOverlay</a>,<a href="#Scene_create"/><i>create</i></a>,<a href="#Scene_destroy"/><i>destroy</i></a>,<a href="#Scene_getTransitionTime"/><i>getTransitionTime</i></a>,<a href="#Scene_getTransitionType"/><i>getTransitionType</i></a>,<a href="#Scene_getViewGroup"/><i>getViewGroup</i></a>,<a href="#Scene_gotoScene"/><i>gotoScene</i></a>,<a href="#Scene_insert"/><i>insert</i></a>,<a href="#OverlayScene_isModal"/>isModal</a>,<a href="#Scene_postClose"/><i>postClose</i></a>,<a href="#Scene_postOpen"/><i>postOpen</i></a>,<a href="#Scene_preClose"/><i>preClose</i></a>,<a href="#Scene_preOpen"/><i>preOpen</i></a>,<a href="#Scene_protect"/><i>protect</i></a></p><hr><a name="OverlayScene__initialiseScene"></a>
+<a name="OverlayScene_closeOverlay"></a>
 <h2>closeOverlay()</h2>
 <p>Helper method which closes the overlay, passing the request on to the Scene Manager instance.</p>
+<a name="OverlayScene_isModal"></a>
 <h2>isModal()</h2>
 <table>
 <tr><td>return</td><td>boolean</td><td>true if it is modal</td></tr>
 </table>
 <p>Method which determines if the current dialog is modal (e.g. does it trap touch and tap events, disabling the layer below)</p>
+<a name="Scene"></a>
 <hr><h1>Scene</h1>
 <p><h3>Extends Base</h3></p>
-<p>A scene has a similar purpose as in Composer or Storyboard - it is a finite state machine with visual objects attached. This defines it as a class, which can be extended and methods overwritten - template pattern basically. Each scene has an associated view group, and associated storage (for data) <BR>The scene lifestyle is split into two chunks - create and destroy messages are tearing up and down the basics - audio, scene backgrounds and other resources and may be garbage collected. The other four - pre/post open and pre/post close are used when entering or leaving a scene, either side of the visible transaction, and should deal with things associated with those events.</p><hr>
+<p>A scene has a similar purpose as in Composer or Storyboard - it is a finite state machine with visual objects attached. This defines it as a class, which can be extended and methods overwritten - template pattern basically. Each scene has an associated view group, and associated storage (for data) <BR>The scene lifestyle is split into two chunks - create and destroy messages are tearing up and down the basics - audio, scene backgrounds and other resources and may be garbage collected. The other four - pre/post open and pre/post close are used when entering or leaving a scene, either side of the visible transaction, and should deal with things associated with those events.</p>
+<p>Methods : <a href="#Scene_(constructor)"/>(constructor)</a>,<a href="#Scene_create"/>create</a>,<a href="#Scene_destroy"/>destroy</a>,<a href="#Scene_getTransitionTime"/>getTransitionTime</a>,<a href="#Scene_getTransitionType"/>getTransitionType</a>,<a href="#Scene_getViewGroup"/>getViewGroup</a>,<a href="#Scene_gotoScene"/>gotoScene</a>,<a href="#Scene_insert"/>insert</a>,<a href="#Scene_postClose"/>postClose</a>,<a href="#Scene_postOpen"/>postOpen</a>,<a href="#Scene_preClose"/>preClose</a>,<a href="#Scene_preOpen"/>preOpen</a>,<a href="#Scene_protect"/>protect</a></p><hr><a name="Scene_(constructor)"></a>
 <h2>(constructor)()</h2>
 <p>Constructor (does not use constructor parameters) - sets the scene to an initial non-created state.</p>
+<a name="Scene__destroyScene"></a>
+<a name="Scene__garbageCollectScene"></a>
+<a name="Scene__initialiseScene"></a>
+<a name="Scene_create"></a>
 <h2>create()</h2>
 <p>Scene message template. There are six of these, each may be overridden if required. create is called when the scene is first created, but is not actually shown. This should be background stuff that is used all the time. Scenes can be destroyed for garbage collection reasons (sends a destroy message) and later created if needed. In this case, the associated data will not be lost.</p>
+<a name="Scene_destroy"></a>
 <h2>destroy()</h2>
 <p>Scene message template. There are six of these, each may be overridden if required. Called when a scene is about to be garbage collected or terminally destroyed (in which case it cannot be recreated, it is dead-dead)</p>
+<a name="Scene_getTransitionTime"></a>
 <h2>getTransitionTime()</h2>
 <table>
 <tr><td>return</td><td>number</td><td>time of the transition to the next scene in milliseconds.</td></tr>
 </table>
 <p>Template method for retrieving the transition time associated with this scene. It is the outgoing transition that is defined here. Can be overriden to change.</p>
+<a name="Scene_getTransitionType"></a>
 <h2>getTransitionType()</h2>
 <table>
 <tr><td>return</td><td>string</td><td>name of transition to be used when leaving scene.</td></tr>
 </table>
 <p>Template method for retrieving the transition type associated with this scene. It is the outgoing transition that is defined here. Can be overridden to change.</p>
+<a name="Scene_getViewGroup"></a>
 <h2>getViewGroup()</h2>
 <table>
 <tr><td>return</td><td>displayGroup</td><td>view group for the scene</td></tr>
 </table>
 <p>Gets the view group for the current scene</p>
+<a name="Scene_gotoScene"></a>
 <h2>gotoScene(scene)</h2>
 <table>
 <tr><td>scene</td><td>Scene Name/Reference</td><td>name or index of scene</td></tr>
 </table>
 <p>Helper method that allows gotoScene() to be called from the scene</p>
+<a name="Scene_insert"></a>
 <h2>insert(object)</h2>
 <table>
 <tr><td>object</td><td></td><td></td></tr>
 <tr><td>return</td><td>Scene</td><td>allow chaining</td></tr>
 </table>
 <p>Helper method to insert display object in view group</p>
+<a name="Scene_postClose"></a>
 <h2>postClose()</h2>
 <p>Scene message template. There are six of these, each may be overridden if required. Called when a scene is being left, after the visible transition between scenes</p>
+<a name="Scene_postOpen"></a>
 <h2>postOpen()</h2>
 <p>Scene message template. There are six of these, each may be overridden if required. Called when a scene is being switched to, after the visible transition between scenes</p>
+<a name="Scene_preClose"></a>
 <h2>preClose()</h2>
 <p>Scene message template. There are six of these, each may be overridden if required. Called when a scene is being left, before the visible transition between scenes</p>
+<a name="Scene_preOpen"></a>
 <h2>preOpen()</h2>
 <p>Scene message template. There are six of these, each may be overridden if required. Called when a scene is being switched to, before the visible transition between scenes</p>
+<a name="Scene_protect"></a>
 <h2>protect()</h2>
 <table>
 <tr><td>return</td><td>Scene</td><td>allow chaining</td></tr>
 </table>
 <p>Protect the current scene against garbage collection</p>
+<a name="Scene_setManagerInstance"></a>
+<a name="Scene_setVisible"></a>
+<a name="SceneManager"></a>
 <hr><h1>SceneManager</h1>
 <p><h3>Extends Base</h3></p>
-<p>The scene manager class is responsible for managing scenes (there's a surprise) - it keeps a list of scenes by name, switches between them on command, destroys them all on request and handles the transitions. It locks out transitions when one is taking place, so you cannot start a new transition until the old one has finished. Additionally, if a scene has an enterFrame() method this will be called every frame with the normal parameter and an additional parameter, the time in milliseconds since the scene started. This can be seen in the delay scene subclass. This class is a singleton</p><hr>
+<p>The scene manager class is responsible for managing scenes (there's a surprise) - it keeps a list of scenes by name, switches between them on command, destroys them all on request and handles the transitions. It locks out transitions when one is taking place, so you cannot start a new transition until the old one has finished. Additionally, if a scene has an enterFrame() method this will be called every frame with the normal parameter and an additional parameter, the time in milliseconds since the scene started. This can be seen in the delay scene subclass. This class is a singleton</p>
+<p>Methods : <a href="#SceneManager_(constructor)"/>(constructor)</a>,<a href="#SceneManager_append"/>append</a>,<a href="#SceneManager_destroy"/>destroy</a>,<a href="#SceneManager_getCurrentScene"/>getCurrentScene</a>,<a href="#SceneManager_gotoScene"/>gotoScene</a></p><hr><a name="SceneManager_(constructor)"></a>
 <h2>(constructor)(transitionManager)</h2>
 <table>
 <tr><td>transitionManager</td><td>transition manager</td><td>will use this instance of transition manager if provided.</td></tr>
 </table>
 <p>Constructor - accesses the transition manager, clears the scene store and current scene</p>
+<a name="SceneManager__closeOverlay"></a>
+<a name="SceneManager__setEnableEnterFrameEvent"></a>
+<a name="SceneManager_append"></a>
 <h2>append(sceneName,sceneInstance)</h2>
 <table>
 <tr><td>sceneName</td><td>string</td><td>Name of scene, case insensitive</td></tr>
 <tr><td>sceneInstance</td><td>Scene</td><td>Scene instance to be added, must be a Scene or subclass instance.</td></tr>
 </table>
 <p>Tell the SceneManager about a new scene.</p>
+<a name="SceneManager_destroy"></a>
 <h2>destroy()</h2>
 <p>Destroys the whole shebang - enter frame off, close the current scene and throwing everything away terminally.</p>
+<a name="SceneManager_enterFrame"></a>
+<a name="SceneManager_getCurrentScene"></a>
 <h2>getCurrentScene()</h2>
 <table>
 <tr><td>return</td><td>Scene</td><td>get the current scene instance (not name), may be nil at the start before the first gotoScene()</td></tr>
 </table>
 <p>Retrieve the current scene</p>
+<a name="SceneManager_gotoScene"></a>
 <h2>gotoScene(scene)</h2>
 <table>
 <tr><td>scene</td><td>Scene/String</td><td>Name of scene, or reference to scene, to which you transition.</td></tr>
 </table>
 <p>Go to a new scene. This will be blocked if a transition is taking place. This sets everything up, sending preOpen to the new Scene, preClose to the current (creating the new scene if required, which will cause a create message), then it transitions between the two scenes using the new scenes transition information</p>
+<a name="SceneManager_transitionCompleted"></a>
 <hr><p><i>LUA Autodoc by Paul Robson 2014</i></p><hr></body></html>
