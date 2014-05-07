@@ -31,7 +31,7 @@ function Scene:initialise()
 	self.storage = {} 																		-- 'protected' storage.
 end
 
---//	Sets the owning instance of the scene, so it knows who manages it. This is used in methods like gotoScene() so that they can be accessed
+--//%	Sets the owning instance of the scene, so it knows who manages it. This is used in methods like gotoScene() so that they can be accessed
 --//	from the scene code (using self) rather than mandating a reference to the scene manager
 --//	@manager 	[scene mananger]		scene manager object that 'owns' the scene.
 
@@ -42,7 +42,7 @@ function Scene:setManagerInstance(manager) self.owningManager = manager return s
 
 function Scene:getViewGroup() return self.viewGroup end 									-- get the view group for this scene.
 
---//	Set the visibility state of the scene
+--//%	Set the visibility state of the scene
 --//	@isVisible [boolean]				true if should be visible
 --//	@return [Scene] allow chaining
 
@@ -62,7 +62,7 @@ function Scene:insert(object) self.viewGroup:insert(object) return self end 				
 
 function Scene:protect() self.allowGarbageCollection = false return self end 				-- set the garbage collection protection flag.
 
---//	Method responsible for physically creating the viewgroup for the scene, and calling create if required (e.g. it has been destroyed)
+--//%	Method responsible for physically creating the viewgroup for the scene, and calling create if required (e.g. it has been destroyed)
 
 function Scene:_initialiseScene()															-- creates scene if necessary.
 	if not self.isCreated then 																-- if not created
@@ -73,7 +73,7 @@ function Scene:_initialiseScene()															-- creates scene if necessary.
 	self:setVisible(false) 																	-- hide the scene, we don't actually want it yet.
 end
 
---//	Garbage collect the current scene, or try to. If GC is permitted by the Scene, will call destroy and clear up any outstanding references.
+--//%	Garbage collect the current scene, or try to. If GC is permitted by the Scene, will call destroy and clear up any outstanding references.
 --//	@return [boolean]	true if garbage collection happened.
 
 function Scene:_garbageCollectScene() 														-- destroy scene (can be created) if allowed - freeing up space		
@@ -86,7 +86,7 @@ function Scene:_garbageCollectScene() 														-- destroy scene (can be cre
 	return self.allowGarbageCollection 														-- return true if was garbage collected.
 end
 
---//	Brutal version of Garbage Collect - clears everything, nulls everything, destroys the object completely.
+--//%	Brutal version of Garbage Collect - clears everything, nulls everything, destroys the object completely.
 
 function Scene:_destroyScene() 																-- murderdeathkill scene destroyer, just destroys it.
 	self.allowGarbageCollection = true 														-- we are deleting this whatever.
@@ -142,7 +142,7 @@ function Scene:destroy() end
 
 local DelayScene = Scene:new()
 
---//	EnterFrame handler. If sufficient time has elapsed, it will go to the next scene
+--//%	EnterFrame handler. If sufficient time has elapsed, it will go to the next scene
 --//	@e [event object]		Event for enterFrame, from Corona
 --//	@elapsed [number]		Elapsed time since scene was opened (does not include the transition)
 
@@ -172,7 +172,7 @@ local OverlayScene = Scene:new()
 
 OverlayScene.isOverlay = true 																-- return true if operates as overlay.
 
---//	The initialise scene is overridden. The main purpose is to create a rectangle over the current scene, which can 'catch' touch and tap events so they
+--//%	The initialise scene is overridden. The main purpose is to create a rectangle over the current scene, which can 'catch' touch and tap events so they
 --//	do not filter through to the screen below.
 
 function OverlayScene:_initialiseScene()
@@ -253,11 +253,11 @@ function SceneManager:destroy()
 	self.transitionManager = nil
 end
 
---//	Enable or disable the enter frame event. The frame status is tracked so it will not be added twice (say)
+--//%	Enable or disable the enter frame event. The frame status is tracked so it will not be added twice (say)
 --//	@newStatus [boolean]	Whether or not the enterFrame event is applied to this object
 
 function SceneManager:_setEnableEnterFrameEvent(newStatus) 									-- turn enter-frame off and on.
-	if self.newStatus ~= self.isEnterFrameEventEnabled then 								-- status changed.
+	if newStatus ~= self.isEnterFrameEventEnabled then 										-- status changed.
 		self.isEnterFrameEventEnabled = newStatus 											-- update status
 		if newStatus then  Runtime:addEventListener( "enterFrame", self )					-- add or remove event listener accordingly.
 		else 			   Runtime:removeEventListener( "enterFrame", self )
@@ -265,7 +265,7 @@ function SceneManager:_setEnableEnterFrameEvent(newStatus) 									-- turn ente
 	end
 end
 
---//	Enterframe event handler. Dispatches to current scene, providing it has an enterFrame method to handle it , and a transition is not
+--//%	Enterframe event handler. Dispatches to current scene, providing it has an enterFrame method to handle it , and a transition is not
 --//	in progress. Also adds a time in milliseconds since the scene opened.
 --//	@e [event object]	Corona's enter frame event.
 function SceneManager:enterFrame(e) 														-- handle enter frame listener owned by Scene Manager.
@@ -333,7 +333,7 @@ function SceneManager:gotoScene(scene)
 
 end
 
---//		Method used to close overlay, called from the scene. Like gotoScene() does not function in a transition. 
+--//%		Method used to close overlay, called from the scene. Like gotoScene() does not function in a transition. 
 
 function SceneManager:_closeOverlay()
 	if SceneManager.transitionInProgress then return end									-- cannot do a transition when one is happening.
@@ -345,7 +345,7 @@ function SceneManager:_closeOverlay()
 									self.currentScene:getTransitionTime())
 end
 
---//	Method call when the transaction is completed. Two seperate parts - one when coming from an overlay, where it resurrects the 
+--//%	Method call when the transaction is completed. Two seperate parts - one when coming from an overlay, where it resurrects the 
 --//	previous scene, and one coming from another scene, where it sends it post close, hides it, and sends the new scene post open.
 
 function SceneManager:transitionCompleted()													-- this is called when a transition has completed.

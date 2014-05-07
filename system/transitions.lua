@@ -57,7 +57,7 @@ function Transition:execute(displayGroup,timerPeriod,completionTarget)
 								  xScale = self.description.xScaleEnd, yScale = self.description.yScaleEnd })
 end
 
---//	This is an event method, called when the transition is completed. It resets everything back to the default state - views/objects are not left
+--//%	This is an event method, called when the transition is completed. It resets everything back to the default state - views/objects are not left
 --//	as they were post transition, and sends a transitionCompletionMessage() event to the object passed in the execute method
 --
 --//	@displayGroup 	[Corona Display Object]		the display group that was transitioned.
@@ -93,7 +93,7 @@ function TransitionManager:initialise()
 	self.transitionList = {} 															-- Clear the list of known transitions.
 end
 
---//	Adds a transition pair to the register of named transitions
+--//%	Adds a transition pair to the register of named transitions
 --//	@name 	[string]					name of transition
 --//	@fromTransition [transition def]	descriptor of 'from' transition half (e.g. fade out)
 --//	@toTransition  [transition def]		descriptor of 'to' transition half (e.g. fade in)
@@ -146,7 +146,7 @@ function TransitionManager:execute(transitionName,target,fromScene,toScene,time)
 	end
 end
 
---//	Helper method that launches a specific transition on a specific scene.
+--//%	Helper method that launches a specific transition on a specific scene.
 --//	@scene 		[display object]		scene to transition
 --//	@transition [transition]			transition to perform it on.
 
@@ -155,7 +155,7 @@ function TransitionManager:launch(scene,transition)
 	transition:execute(scene,self.sceneInfo.time,self) 									-- start the transition and notify
 end
 
---//	Helper method that makes a scene visible or not (if it exists) and also brings it to the front.
+--//%	Helper method that makes a scene visible or not (if it exists) and also brings it to the front.
 --//	@scene 		[display object]		scene to make visible or otherwise
 --//	@isVisible	[boolean]				visibility state required
 
@@ -166,7 +166,7 @@ function TransitionManager:makeVisible(scene,isVisible) 								-- set visibilit
 	end
 end
 
---//	Helper method - receives 'transition completed' message from transition, then figures out what's going on - has it finished
+--//%	Helper method - receives 'transition completed' message from transition, then figures out what's going on - has it finished
 --//	or does it have to launch the out transition (if you have an in and an out and they are not concurrent)
 
 function TransitionManager:transitionCompletedMessage()
